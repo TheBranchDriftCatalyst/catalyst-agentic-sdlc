@@ -11,12 +11,6 @@ Meta-plugin that bundles the user's globally-useful agents, slash commands, and 
 
 ## Contents
 
-### Agents
-
-| Agent                          | Purpose                                                                                                 |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| `structured-logging-architect` | Senior observability engineer for designing and implementing structured logging (Elasticsearch/Datadog) |
-
 ### Slash commands
 
 | Command                        | Purpose                                                                     |

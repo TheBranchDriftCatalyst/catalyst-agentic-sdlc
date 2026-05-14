@@ -35,5 +35,5 @@ highlights:
   - "Confidence-weighted synthesis with agreement matrix, independence bonus, and quorum rules — high-confidence dissent is preserved rather than averaged away"
   - "Quick single-pass decomposition command (/sdlc-council-quick) alongside the full council deliberation (/sdlc-council)"
   - "Plugin: ticket-workflows — drives a ticket from branch through dev/review/QA/wrapup with progressive context accumulation, beads integration, and bundled PostToolUse/PreToolUse/Stop hooks"
-  - "Plugin: catalyst-meta — meta-plugin bundling globally-useful agents, memory-service commands, and session hooks (workstream briefing, pre/post-compact context preservation, git-guard policy enforcement) designed to be kept always-enabled"
+  - "Plugin: catalyst-meta — meta-plugin bundling memory-service slash commands, session hooks (workstream briefing, pre/post-compact context preservation, git-guard policy enforcement), and a bundled MCP server stack — designed to be kept always-enabled"
   - "Lefthook-managed pre-commit pipeline: markdownlint + prettier formatting + JSON manifest validation; commitlint with scoped enum; commit-and-tag-version for synchronized releases"

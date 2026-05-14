@@ -11,16 +11,16 @@ catalyst-agentic-sdlc/                  # repo root = marketplace root
 └── plugins/
     ├── catalyst-sdlc-framework/        # plugin: Cognitive Council SDLC framework
     │   ├── .claude-plugin/plugin.json
-    │   ├── agents/                     # 7 expert agents
+    │   ├── agents/                     # 7 council experts + structured-logging-architect
     │   └── commands/                   # /sdlc-council, /sdlc-council-quick
     ├── ticket-workflows/               # plugin: structured ticket workflow
     │   ├── .claude-plugin/plugin.json  # ships PostToolUse/PreToolUse/Stop hooks
     │   ├── agents/                     # dev, review, qa, coverage
     │   ├── commands/                   # begin, status, review, qa, tech-compare, wrapup, dev
     │   └── templates/                  # context, pr-description, qa-report
-    └── catalyst-meta/                  # plugin: global agents, commands, session hooks
+    └── catalyst-meta/                  # plugin: global commands, hooks, MCP servers
         ├── .claude-plugin/plugin.json  # wires SessionStart/PreCompact/PreToolUse hooks
-        ├── agents/                     # structured-logging-architect
+        ├── .mcp.json                   # bundled MCP server stack
         ├── commands/                   # memory-status, init-memory, save-context, optimize
         ├── hooks/                      # workstream-briefing, pre/post-compact, git-guard
         └── docs/                       # memory-architecture reference
@@ -67,6 +67,12 @@ A 6-expert Cognitive Council that decomposes epics and features into structured,
 | `sdlc-devops-delivery`   | CI/CD, infrastructure, release strategy, feature flags                                 |
 | `sdlc-product-design`    | User journeys, story mapping, value delivery sequencing                                |
 | `sdlc-red-team`          | Adversarial — challenges necessity, finds scope creep, argues for minimum viable scope |
+
+### Additional design agents
+
+| Agent                          | Purpose                                                                                                            |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `structured-logging-architect` | Senior observability engineer — designs structured logging for Elasticsearch/Datadog. Invoke directly when needed. |
 
 ### The 5-phase protocol
 
@@ -127,7 +133,7 @@ Structured ticket workflow with progressive context, beads integration, quality 
 
 ## Plugin: `catalyst-meta`
 
-Bundles globally-useful agents, slash commands, and session hooks. Intended to be installed once and left always-enabled — provides the workstream briefing at session start, compact protection, and the git-guard policy enforcement.
+Bundles globally-useful slash commands, session hooks, and an MCP server stack. Intended to be installed once and left always-enabled — provides the workstream briefing at session start, compact protection, and the git-guard policy enforcement.
 
 ### Slash commands
 
@@ -137,10 +143,6 @@ Bundles globally-useful agents, slash commands, and session hooks. Intended to b
 | `/catalyst-meta:init-memory`   | Initialize memory layers for a new project  |
 | `/catalyst-meta:save-context`  | Persist session learnings to memory-service |
 | `/catalyst-meta:optimize`      | Analyze and optimize code for performance   |
-
-### Agent
-
-`structured-logging-architect` — designs and implements structured logging for Elasticsearch/Datadog observability.
 
 ### Hooks (auto-wired)
 
@@ -198,7 +200,7 @@ Pre-commit (lefthook) runs on staged files: markdownlint → prettier → manife
 | `ci`       | none  | GitHub Actions workflows                                 |
 | `chore`    | none  | maintenance (deps, version bumps); hidden from CHANGELOG |
 
-**Scopes** (enforced by `commitlint.config.mjs`): `marketplace`, `sdlc-framework`, `teak-workflows`, `tooling`, `docs`, `deps`, `ci`, `release`.
+**Scopes** (enforced by the `commitlint` key in `package.json`): `marketplace`, `sdlc-framework`, `ticket-workflows`, `catalyst-meta`, `tooling`, `docs`, `deps`, `ci`, `release`.
 
 A `BREAKING CHANGE:` footer or `!` suffix (`feat!:`) bumps the major version.
 
@@ -210,6 +212,6 @@ npm run release          # bumps package.json + plugin.json files, regenerates C
 git push --follow-tags origin main
 ```
 
-`commit-and-tag-version` infers the bump from commits since the last tag, updates `package.json` plus every plugin's `plugin.json` (see `.versionrc.json` `bumpFiles`), and rewrites `CHANGELOG.md`. Pushing the tag triggers `.github/workflows/release.yml`, which extracts the section for that version from the changelog and creates a GitHub Release.
+`commit-and-tag-version` infers the bump from commits since the last tag, updates `package.json` plus every plugin's `plugin.json` (see the `commit-and-tag-version.bumpFiles` array in `package.json`), and rewrites `CHANGELOG.md`. Pushing the tag triggers `.github/workflows/release.yml`, which extracts the section for that version from the changelog and creates a GitHub Release.
 
 > Note: this marketplace is currently single-versioned — all plugins bump together. When plugins diverge enough to need independent release cycles, migrate to [changesets](https://github.com/changesets/changesets).
