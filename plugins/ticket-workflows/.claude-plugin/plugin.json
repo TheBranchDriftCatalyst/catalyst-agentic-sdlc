@@ -1,0 +1,46 @@
+{
+  "name": "ticket-workflows",
+  "description": "Structured ticket workflow with progressive context, beads integration, quality gates, and per-stage agents (dev, review, QA, coverage)",
+  "version": "0.1.0",
+  "author": {
+    "name": "TheBranchDriftCatalyst"
+  },
+  "repository": "https://github.com/TheBranchDriftCatalyst/catalyst-agentic-sdlc",
+  "license": "MIT",
+  "keywords": ["workflow", "tickets", "code-review", "qa", "dev", "beads"],
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash(git checkout -b*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'New branch detected. Run /ticket-workflows:begin to initialize workflow context.'"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git commit*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'if ! ls changes/*.* 2>/dev/null | head -1 > /dev/null; then echo \"[ticket-workflows] no changelog fragment found in changes/\"; fi'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'BRANCH=$(git branch --show-current 2>/dev/null); if [ -n \"$BRANCH\" ]; then TYPE=${BRANCH%%/*}; REST=${BRANCH#*/}; TICKET=${REST%%/*}; DESC=${REST#*/}; DIR=\".scratch/ticket-workflows/$TYPE/$TICKET-$DESC\"; if [ -d \"$DIR\" ]; then echo \"[ticket-workflows] workflow context exists at $DIR - consider updating before ending session.\"; fi; fi'"
+          }
+        ]
+      }
+    ]
+  }
+}

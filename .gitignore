@@ -11,5 +11,5 @@ __pycache__/
 .lefthook-local.yml
 ~/
 
-# scratch / archive
-_SAVE/
+# Claude Code per-project state
+.claude/settings.local.json

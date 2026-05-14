@@ -5,18 +5,25 @@ Private Claude Code plugin marketplace. Hosts the Catalyst family of multi-agent
 ## Repository layout
 
 ```
-catalyst-sdlc-framework/                # repo root = marketplace root
+catalyst-agentic-sdlc/                  # repo root = marketplace root
 ├── .claude-plugin/
 │   └── marketplace.json                # marketplace catalog (name: "catalyst")
 └── plugins/
     ├── catalyst-sdlc-framework/        # plugin: Cognitive Council SDLC framework
     │   ├── .claude-plugin/plugin.json
     │   ├── agents/                     # 7 expert agents
-    │   ├── commands/                   # /sdlc-council, /sdlc-council-quick
-    │   └── skills/
-    └── teak-workflows/                 # plugin: workflow primitives (stub)
-        ├── .claude-plugin/plugin.json
-        ├── agents/  commands/  skills/
+    │   └── commands/                   # /sdlc-council, /sdlc-council-quick
+    ├── ticket-workflows/               # plugin: structured ticket workflow
+    │   ├── .claude-plugin/plugin.json  # ships PostToolUse/PreToolUse/Stop hooks
+    │   ├── agents/                     # dev, review, qa, coverage
+    │   ├── commands/                   # begin, status, review, qa, tech-compare, wrapup, dev
+    │   └── templates/                  # context, pr-description, qa-report
+    └── catalyst-meta/                  # plugin: global agents, commands, session hooks
+        ├── .claude-plugin/plugin.json  # wires SessionStart/PreCompact/PreToolUse hooks
+        ├── agents/                     # structured-logging-architect
+        ├── commands/                   # memory-status, init-memory, save-context, optimize
+        ├── hooks/                      # workstream-briefing, pre/post-compact, git-guard
+        └── docs/                       # memory-architecture reference
 ```
 
 The repo follows the multi-plugin marketplace pattern from the Claude Code [plugin marketplace docs](https://code.claude.com/docs/en/plugin-marketplaces): a single `marketplace.json` at the root lists every plugin, each plugin lives under `plugins/<name>/` with its own `.claude-plugin/plugin.json` and component directories (`agents/`, `commands/`, `skills/`, `hooks/`).
@@ -31,7 +38,8 @@ The repo follows the multi-plugin marketplace pattern from the Claude Code [plug
 /plugin marketplace add TheBranchDriftCatalyst/catalyst-agentic-sdlc
 
 /plugin install catalyst-sdlc-framework@catalyst
-/plugin install teak-workflows@catalyst
+/plugin install ticket-workflows@catalyst
+/plugin install catalyst-meta@catalyst
 ```
 
 Installed plugins are cached at `~/.claude/plugins/cache/` — re-run `/plugin marketplace update catalyst` after structural changes to pull updated manifests.
@@ -87,9 +95,63 @@ Synthesis uses a confidence-weighted agreement matrix with an independence bonus
 
 ---
 
-## Plugin: `teak-workflows`
+## Plugin: `ticket-workflows`
 
-Stub. Reserved for Teak workflow automation primitives. Not yet implemented.
+Structured ticket workflow with progressive context, beads integration, quality gates, and per-stage agents. Drives a ticket from branch creation through dev → review → QA → wrapup, accumulating evidence in `.scratch/ticket-workflows/<type>/<id>-<desc>/`.
+
+### Slash commands
+
+| Command                          | Purpose                                                        |
+| -------------------------------- | -------------------------------------------------------------- |
+| `/ticket-workflows:begin`        | Initialize branch, context dir, and beads issue                |
+| `/ticket-workflows:dev`          | Plan → implement → verify → critique loop                      |
+| `/ticket-workflows:status`       | Show progress including beads issue state                      |
+| `/ticket-workflows:review`       | Run `code-review-agent` and generate a scorecard               |
+| `/ticket-workflows:qa`           | Run `qa-agent` (test audit + manual verification)              |
+| `/ticket-workflows:tech-compare` | Structured technology evaluation                               |
+| `/ticket-workflows:wrapup`       | Commit, changelog fragment, push, PR description, update beads |
+
+### Agents
+
+`dev-agent`, `code-review-agent`, `qa-agent`, `coverage-agent` — invoked by the slash commands above.
+
+### Hooks (auto-wired)
+
+| Event         | Trigger           | Action                                          |
+| ------------- | ----------------- | ----------------------------------------------- |
+| `PostToolUse` | `git checkout -b` | Remind to run `/ticket-workflows:begin`         |
+| `PreToolUse`  | `git commit`      | Warn if no changelog fragment in `changes/`     |
+| `Stop`        | end of session    | Remind to update workflow context if one exists |
+
+---
+
+## Plugin: `catalyst-meta`
+
+Bundles globally-useful agents, slash commands, and session hooks. Intended to be installed once and left always-enabled — provides the workstream briefing at session start, compact protection, and the git-guard policy enforcement.
+
+### Slash commands
+
+| Command                        | Purpose                                     |
+| ------------------------------ | ------------------------------------------- |
+| `/catalyst-meta:memory-status` | Status of all three memory layers           |
+| `/catalyst-meta:init-memory`   | Initialize memory layers for a new project  |
+| `/catalyst-meta:save-context`  | Persist session learnings to memory-service |
+| `/catalyst-meta:optimize`      | Analyze and optimize code for performance   |
+
+### Agent
+
+`structured-logging-architect` — designs and implements structured logging for Elasticsearch/Datadog observability.
+
+### Hooks (auto-wired)
+
+| Event                  | Script                    | Purpose                                                 |
+| ---------------------- | ------------------------- | ------------------------------------------------------- |
+| `SessionStart:startup` | `workstream-briefing.sh`  | Briefing (recent memories, beads status, indexed repos) |
+| `SessionStart:compact` | `post-compact-context.sh` | Restore context after auto-compaction                   |
+| `PreCompact`           | `pre-compact.sh`          | Preserve state and prompt memory persistence            |
+| `PreToolUse:Bash`      | `git-guard.sh`            | Block destructive git ops and AI-attribution in commits |
+
+All hook scripts live in `plugins/catalyst-meta/hooks/` and are referenced via `${CLAUDE_PLUGIN_ROOT}/hooks/<script>.sh`. They fire only when the plugin is enabled — equivalent to user-global hooks in practice if you keep the plugin always on.
 
 ---
 

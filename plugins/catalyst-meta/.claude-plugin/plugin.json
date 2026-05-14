@@ -1,0 +1,55 @@
+{
+  "name": "catalyst-meta",
+  "description": "Catalyst meta-plugin — global agents, slash commands, and session hooks (workstream briefing, pre/post-compact context preservation, git-guard). Designed to be kept always-enabled.",
+  "version": "0.1.0",
+  "author": {
+    "name": "TheBranchDriftCatalyst"
+  },
+  "repository": "https://github.com/TheBranchDriftCatalyst/catalyst-agentic-sdlc",
+  "license": "MIT",
+  "keywords": ["meta", "globals", "hooks", "memory-service", "workstream", "git-guard"],
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/workstream-briefing.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/post-compact-context.sh"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/pre-compact.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/git-guard.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

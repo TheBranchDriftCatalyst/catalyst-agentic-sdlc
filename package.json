@@ -14,6 +14,8 @@
     "format": "prettier --write \"**/*.{md,json,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{md,json,yml,yaml}\"",
     "validate:manifests": "node ./scripts/validate-manifests.mjs",
+    "mcp:link": "./plugins/catalyst-meta/scripts/install-mcp-symlink.sh",
+    "mcp:unlink": "./plugins/catalyst-meta/scripts/install-mcp-symlink.sh --uninstall",
     "commitlint": "commitlint --edit",
     "changelog": "conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0",
     "release": "commit-and-tag-version",
@@ -57,7 +59,8 @@
         [
           "marketplace",
           "sdlc-framework",
-          "teak-workflows",
+          "ticket-workflows",
+          "catalyst-meta",
           "tooling",
           "docs",
           "deps",
@@ -136,7 +139,11 @@
         "type": "json"
       },
       {
-        "filename": "plugins/teak-workflows/.claude-plugin/plugin.json",
+        "filename": "plugins/ticket-workflows/.claude-plugin/plugin.json",
+        "type": "json"
+      },
+      {
+        "filename": "plugins/catalyst-meta/.claude-plugin/plugin.json",
         "type": "json"
       }
     ]

@@ -15,11 +15,18 @@
       "keywords": ["sdlc", "cognitive-council", "task-decomposition", "multi-agent", "deliberation"]
     },
     {
-      "name": "teak-workflows",
-      "source": "./plugins/teak-workflows",
-      "description": "Workflow automation primitives for Teak (stub — under development)",
-      "version": "0.0.1",
-      "keywords": ["workflow", "automation", "teak"]
+      "name": "ticket-workflows",
+      "source": "./plugins/ticket-workflows",
+      "description": "Structured ticket workflow with progressive context, beads integration, quality gates, and per-stage agents (dev, review, QA, coverage)",
+      "version": "0.1.0",
+      "keywords": ["workflow", "tickets", "code-review", "qa", "dev", "beads"]
+    },
+    {
+      "name": "catalyst-meta",
+      "source": "./plugins/catalyst-meta",
+      "description": "Catalyst meta-plugin: global agents, slash commands, and session hooks (workstream briefing, pre/post-compact, git-guard). Designed to be kept always-enabled.",
+      "version": "0.1.0",
+      "keywords": ["meta", "globals", "hooks", "memory-service", "workstream"]
     }
   ]
 }

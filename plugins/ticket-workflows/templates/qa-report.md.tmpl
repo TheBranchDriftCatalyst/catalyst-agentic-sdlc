@@ -1,0 +1,50 @@
+# QA Report: {{TICKET_ID}}
+
+**Date:** {{DATE}}
+**Branch:** {{BRANCH}}
+**Ticket:** {{TICKET_ID}}
+
+---
+
+## Test Audit Summary
+
+| Metric | Value |
+|--------|-------|
+| Changed source files | {{CHANGED_FILES}} |
+| Test files found | {{TEST_FILES}} |
+| Source files without tests | {{UNTESTED_FILES}} |
+| Tests run | {{TESTS_RUN}} |
+| Tests passed | {{TESTS_PASSED}} |
+| Tests failed | {{TESTS_FAILED}} |
+
+### Coverage Gaps
+
+{{COVERAGE_GAPS}}
+
+### Test Quality Issues
+
+{{QUALITY_ISSUES}}
+
+---
+
+## Manual Verification Results
+
+| # | Criterion | Method | Result | Evidence |
+|---|-----------|--------|--------|----------|
+{{VERIFICATION_ROWS}}
+
+---
+
+## Overall Result: {{VERDICT}}
+
+### Notes
+
+{{NOTES}}
+
+---
+
+## Artifacts
+
+- Curl scripts: `curl-commands.md`
+- Seed data: `seeds.md`
+- Screenshots: `manual-verification-*.png`

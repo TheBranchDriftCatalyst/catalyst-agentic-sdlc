@@ -1,0 +1,75 @@
+# Workflow Context: {{TICKET_ID}}
+
+## Ticket Info
+
+- **Ticket ID:** {{TICKET_ID}}
+- **Branch:** `{{BRANCH}}`
+- **Type:** {{TYPE}}
+- **Created:** {{DATE}}
+- **Beads Issue:** {{BEADS_ID}}
+
+## Workflow Progress
+
+- [x] Begin Ticket - Context initialized
+- [ ] Development - Implementation in progress
+- [ ] Code Review - Quality gate
+- [ ] QA - Test audit & verification
+- [ ] Wrap Up - PR finalization
+
+## Artifacts
+
+| Stage | File | Status |
+|-------|------|--------|
+| Begin | `ticket-spec.md` | ✅ Created |
+| Dev | `analysis.md` | ⬜ Pending |
+| Review | `code-review.md` | ⬜ Pending |
+| QA | `evidence/qa-report.md` | ⬜ Pending |
+| Wrapup | `pr-description.md` | ⬜ Pending |
+
+---
+
+## Summaries
+
+> **Context Management:** This section contains condensed summaries.
+> For full details, read the referenced artifact files.
+
+### Ticket Summary
+
+<!-- 3-5 bullets: goals, acceptance criteria, scope -->
+
+**Full details:** `ticket-spec.md`
+
+### Implementation Notes
+
+<!-- 5-7 bullets: approach, key changes, files modified -->
+
+**Full details:** `analysis.md`
+
+### Key Decisions
+
+<!-- 2-3 sentences per decision -->
+
+**Full details:** `decisions/*.md`
+
+### Review Summary
+
+<!-- 3-5 bullets: pass/fail, issues, recommendations -->
+
+**Full details:** `code-review.md`
+
+### QA Summary
+
+<!-- 3-5 bullets: test audit, manual verification, gaps -->
+
+**Full details:** `evidence/qa-report.md`
+
+---
+
+## Context Depth Guide
+
+| Task | Read |
+|------|------|
+| Quick question | This file only |
+| Continue dev | + `ticket-spec.md` |
+| Debug tests | + `code-review.md` |
+| Major refactor | All artifacts |
