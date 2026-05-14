@@ -1,0 +1,144 @@
+{
+  "name": "catalyst-agentic-sdlc",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Private Claude Code plugin marketplace for the Catalyst family of multi-agent SDLC and workflow plugins",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/TheBranchDriftCatalyst/catalyst-agentic-sdlc.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
+    "lint:md:fix": "markdownlint-cli2 --fix \"**/*.md\" \"#node_modules\"",
+    "format": "prettier --write \"**/*.{md,json,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{md,json,yml,yaml}\"",
+    "validate:manifests": "node ./scripts/validate-manifests.mjs",
+    "commitlint": "commitlint --edit",
+    "changelog": "conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0",
+    "release": "commit-and-tag-version",
+    "release:dry": "commit-and-tag-version --dry-run",
+    "prepare": "lefthook install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "commit-and-tag-version": "^12.5.0",
+    "conventional-changelog-cli": "^5.0.0",
+    "lefthook": "^1.7.0",
+    "markdownlint-cli2": "^0.14.0",
+    "prettier": "^3.3.3"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "proseWrap": "preserve",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "none",
+    "overrides": [
+      {
+        "files": "*.md",
+        "options": {
+          "tabWidth": 2,
+          "proseWrap": "preserve"
+        }
+      }
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "scope-enum": [
+        2,
+        "always",
+        [
+          "marketplace",
+          "sdlc-framework",
+          "teak-workflows",
+          "tooling",
+          "docs",
+          "deps",
+          "ci",
+          "release"
+        ]
+      ],
+      "header-max-length": [
+        2,
+        "always",
+        100
+      ],
+      "body-max-line-length": [
+        0
+      ]
+    }
+  },
+  "commit-and-tag-version": {
+    "header": "# Changelog\n\nAll notable changes to this marketplace are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n",
+    "types": [
+      {
+        "type": "feat",
+        "section": "Features"
+      },
+      {
+        "type": "fix",
+        "section": "Bug Fixes"
+      },
+      {
+        "type": "perf",
+        "section": "Performance"
+      },
+      {
+        "type": "refactor",
+        "section": "Refactors"
+      },
+      {
+        "type": "docs",
+        "section": "Documentation"
+      },
+      {
+        "type": "build",
+        "section": "Build & Tooling"
+      },
+      {
+        "type": "ci",
+        "section": "CI"
+      },
+      {
+        "type": "chore",
+        "section": "Chores",
+        "hidden": true
+      },
+      {
+        "type": "style",
+        "section": "Styles",
+        "hidden": true
+      },
+      {
+        "type": "test",
+        "section": "Tests",
+        "hidden": true
+      }
+    ],
+    "commitUrlFormat": "https://github.com/TheBranchDriftCatalyst/catalyst-agentic-sdlc/commit/{{hash}}",
+    "compareUrlFormat": "https://github.com/TheBranchDriftCatalyst/catalyst-agentic-sdlc/compare/{{previousTag}}...{{currentTag}}",
+    "issueUrlFormat": "https://github.com/TheBranchDriftCatalyst/catalyst-agentic-sdlc/issues/{{id}}",
+    "userUrlFormat": "https://github.com/{{user}}",
+    "bumpFiles": [
+      {
+        "filename": "package.json",
+        "type": "json"
+      },
+      {
+        "filename": "plugins/catalyst-sdlc-framework/.claude-plugin/plugin.json",
+        "type": "json"
+      },
+      {
+        "filename": "plugins/teak-workflows/.claude-plugin/plugin.json",
+        "type": "json"
+      }
+    ]
+  }
+}

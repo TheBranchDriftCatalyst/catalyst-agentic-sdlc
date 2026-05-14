@@ -1,0 +1,38 @@
+version: "0.1.1"
+name: "catalyst-agentic-sdlc"
+description: "Private Claude Code plugin marketplace hosting the Catalyst family of multi-agent SDLC and workflow plugins — including a 6-expert Cognitive Council that decomposes epics into structured task manifests via a strict 5-phase deliberation protocol"
+repo_url: "https://github.com/TheBranchDriftCatalyst/catalyst-agentic-sdlc"
+private: true
+status: "active"
+
+tech_stack:
+  languages:
+    - "markdown"
+    - "json"
+  frameworks:
+    - "claude-code-plugins"
+  tools:
+    - "claude-code"
+    - "lefthook"
+    - "markdownlint-cli2"
+    - "prettier"
+
+groups:
+  - "meta"
+  - "marketplace"
+  - "catalyst-core"
+
+badges:
+  stars: true
+  issues: true
+  prs: true
+  license: true
+
+highlights:
+  - "Private Claude Code plugin marketplace — single repo hosts multiple plugins under plugins/<name>/ with a top-level .claude-plugin/marketplace.json catalog"
+  - "Plugin: catalyst-sdlc-framework — 6 domain-expert agent contracts (architect, engineer, QA, devops, product, red-team adversarial) collaborating through a 5-phase Cognitive Council protocol"
+  - "Council Orchestrator enforces strict phase gates (Problem Framing, Independent Hypothesis, Cross-Critique, Revision, Vote, Synthesis) with isolation in Phase 1 to prevent groupthink"
+  - "Confidence-weighted synthesis with agreement matrix, independence bonus, and quorum rules — high-confidence dissent is preserved rather than averaged away"
+  - "Quick single-pass decomposition command (/sdlc-council-quick) alongside the full council deliberation (/sdlc-council)"
+  - "Plugin: teak-workflows — stubbed for upcoming workflow automation primitives"
+  - "Lefthook-managed pre-commit pipeline: markdownlint + prettier formatting + JSON manifest validation"

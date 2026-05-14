@@ -1,0 +1,11 @@
+{
+  "name": "teak-workflows",
+  "description": "Workflow automation primitives for Teak (stub — under development)",
+  "version": "0.0.1",
+  "author": {
+    "name": "TheBranchDriftCatalyst"
+  },
+  "repository": "https://github.com/TheBranchDriftCatalyst/catalyst-agentic-sdlc",
+  "license": "MIT",
+  "keywords": ["workflow", "automation", "teak"]
+}

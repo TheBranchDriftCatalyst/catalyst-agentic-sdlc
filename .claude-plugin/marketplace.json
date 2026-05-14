@@ -1,0 +1,25 @@
+{
+  "name": "catalyst",
+  "owner": {
+    "name": "TheBranchDriftCatalyst",
+    "email": "djdanielsh@gmail.com",
+    "url": "https://github.com/TheBranchDriftCatalyst"
+  },
+  "description": "Private marketplace for Catalyst Claude Code plugins (SDLC framework, workflow tooling, and related multi-agent patterns)",
+  "plugins": [
+    {
+      "name": "catalyst-sdlc-framework",
+      "source": "./plugins/catalyst-sdlc-framework",
+      "description": "Multi-agent SDLC framework with Cognitive Council deliberation and task decomposition patterns for structured feature development",
+      "version": "0.1.0",
+      "keywords": ["sdlc", "cognitive-council", "task-decomposition", "multi-agent", "deliberation"]
+    },
+    {
+      "name": "teak-workflows",
+      "source": "./plugins/teak-workflows",
+      "description": "Workflow automation primitives for Teak (stub — under development)",
+      "version": "0.0.1",
+      "keywords": ["workflow", "automation", "teak"]
+    }
+  ]
+}

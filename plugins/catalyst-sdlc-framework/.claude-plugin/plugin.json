@@ -1,0 +1,11 @@
+{
+  "name": "catalyst-sdlc-framework",
+  "description": "Multi-agent SDLC framework with Cognitive Council deliberation and task decomposition patterns for structured feature development",
+  "version": "0.1.0",
+  "author": {
+    "name": "TheBranchDriftCatalyst"
+  },
+  "repository": "https://github.com/TheBranchDriftCatalyst/catalyst-agentic-sdlc",
+  "license": "MIT",
+  "keywords": ["sdlc", "cognitive-council", "task-decomposition", "multi-agent", "deliberation"]
+}
