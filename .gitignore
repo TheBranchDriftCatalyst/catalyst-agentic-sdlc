@@ -10,3 +10,6 @@ __pycache__/
 # lefthook local overrides
 .lefthook-local.yml
 ~/
+
+# scratch / archive
+_SAVE/
