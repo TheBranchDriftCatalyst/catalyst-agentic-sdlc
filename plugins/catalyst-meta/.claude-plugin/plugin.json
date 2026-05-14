@@ -1,7 +1,7 @@
 {
   "name": "catalyst-meta",
   "description": "Catalyst meta-plugin — global agents, slash commands, and session hooks (workstream briefing, pre/post-compact context preservation, git-guard). Designed to be kept always-enabled.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "TheBranchDriftCatalyst"
   },

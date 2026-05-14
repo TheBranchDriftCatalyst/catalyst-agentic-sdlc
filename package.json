@@ -1,6 +1,6 @@
 {
   "name": "catalyst-agentic-sdlc",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Private Claude Code plugin marketplace for the Catalyst family of multi-agent SDLC and workflow plugins",
   "repository": {

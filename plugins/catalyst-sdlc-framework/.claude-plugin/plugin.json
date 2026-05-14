@@ -1,7 +1,7 @@
 {
   "name": "catalyst-sdlc-framework",
   "description": "Multi-agent SDLC framework with Cognitive Council deliberation and task decomposition patterns for structured feature development",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "TheBranchDriftCatalyst"
   },
