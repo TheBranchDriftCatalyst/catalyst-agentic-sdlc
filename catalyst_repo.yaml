@@ -2,7 +2,7 @@ version: "0.1.1"
 name: "catalyst-agentic-sdlc"
 description: "Private Claude Code plugin marketplace hosting the Catalyst family of multi-agent SDLC and workflow plugins — including a 6-expert Cognitive Council that decomposes epics into structured task manifests via a strict 5-phase deliberation protocol"
 repo_url: "https://github.com/TheBranchDriftCatalyst/catalyst-agentic-sdlc"
-private: true
+private: false
 status: "active"
 
 tech_stack:
@@ -11,6 +11,7 @@ tech_stack:
     - "json"
   frameworks:
     - "claude-code-plugins"
+    - "agentic-engineering"
   tools:
     - "claude-code"
     - "lefthook"
