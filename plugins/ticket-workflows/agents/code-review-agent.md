@@ -67,6 +67,7 @@ The agent receives context about:
 - [ ] No N+1 query issues (use `select_related`/`prefetch_related`)
 - [ ] Bulk operations used where appropriate (`bulk_create`, `bulk_update`)
 - [ ] QuerySets evaluated only when necessary
+- [ ] Sequential looping over same arrays are questionable (consider combining into single loop)
 
 #### Models
 
