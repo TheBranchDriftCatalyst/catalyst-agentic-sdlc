@@ -10,21 +10,17 @@ Show current workflow status for the active branch, including beads issue state.
    git branch --show-current
    ```
 
-2. **Find context directory** — canonical path is
-   `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/`, derived
-   from the current branch:
+2. **Find context directory** using the shared resolver — never hand-build
+   the path:
 
    ```bash
-   BRANCH=$(git branch --show-current)
-   TYPE="${BRANCH%%/*}"
-   REST="${BRANCH#*/}"
-   TICKET="${REST%%/*}"
-   DESC="${REST#*/}"
-   WORKFLOW_DIR=".scratch/ticket-workflows/${TYPE}/${TICKET}-${DESC}"
+   WORKFLOW_DIR="$(catalyst ticket context-dir)"
    ```
 
-   If `$WORKFLOW_DIR` does not exist, report "No workflow initialized for
-   this branch".
+   `catalyst ticket context-dir` derives the ticket from the current branch
+   (a `<type>/<KEY>/<slug>` branch) and prints the canonical, flat context
+   dir. If `$WORKFLOW_DIR` is empty or does not exist, report "No workflow
+   initialized for this branch".
 
 3. **Read context.md** and display:
    - Ticket info (ID, type, created date, beads issue)

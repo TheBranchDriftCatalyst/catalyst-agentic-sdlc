@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "catalyst": {
+      "type": "stdio",
+      "command": "catalyst",
+      "args": ["mcp"],
+      "env": {}
+    }
+  }
+}

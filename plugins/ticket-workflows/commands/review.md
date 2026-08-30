@@ -20,8 +20,8 @@ Run the code review agent on the current changeset.
 
 ## Output
 
-Agent generates `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/code-review.md`
-(derived from the current branch — see `/ticket-workflows:begin` for the canonical path template).
+Agent generates `code-review.md` under the ticket's context dir (resolved via
+`catalyst ticket context-dir` — see `/ticket-workflows:begin`).
 
 Summary displayed:
 

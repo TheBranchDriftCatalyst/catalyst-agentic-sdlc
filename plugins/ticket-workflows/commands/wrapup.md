@@ -16,7 +16,7 @@ Before running wrapup, ensure:
 
 Spawn the `code-review-agent` to review staged changes:
 
-- Check `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/code-review.md` exists
+- Check `code-review.md` exists under the ticket's context dir (`catalyst ticket context-dir`)
 - If not, spawn agent to generate it
 - Must pass before continuing
 
@@ -24,7 +24,7 @@ Spawn the `code-review-agent` to review staged changes:
 
 Spawn the `qa-agent` if QA hasn't been completed:
 
-- Check `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/evidence/qa-report.md` exists
+- Check `evidence/qa-report.md` exists under the ticket's context dir (`catalyst ticket context-dir`)
 - If not, spawn agent to generate it
 - Must pass before continuing
 
@@ -34,7 +34,7 @@ Spawn the `coverage-agent` to generate a before/after coverage comparison:
 
 - Scoped to files changed in this branch only
 - Compares coverage on base branch vs current branch
-- Generates `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/evidence/coverage-report.md`
+- Generates `evidence/coverage-report.md` under the ticket's context dir (`catalyst ticket context-dir`)
 - Run in background (does not block other wrapup steps)
 
 ### 4. Create Changelog Fragment
@@ -65,7 +65,8 @@ Actions:
 
 ### 6. Push & Generate PR Description
 
-Push to remote, then generate `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/pr-description.md`:
+Push to remote, then generate `pr-description.md` under the ticket's context dir
+(`catalyst ticket context-dir`):
 
 ```markdown
 ## Description
@@ -144,6 +145,6 @@ Confirm completion:
 **Links:**
 
 - PR URL: `https://github.com/<org>/<repo>/pull/new/<branch>`
-- PR Description: `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/pr-description.md`
+- PR Description: `pr-description.md` under the ticket's context dir (`catalyst ticket context-dir`)
 - Changelog: `changes/DEV-XXXX.<type>`
 - Beads Issue: BD-XXX

@@ -28,7 +28,7 @@ Flag any implementation that contradicts current library documentation.
 
 Before auditing tests, systematically verify each ticket requirement is addressed:
 
-1. Read the ticket spec from `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/ticket-spec.md`
+1. Read the ticket spec from `ticket-spec.md` under the ticket's context dir (`catalyst ticket context-dir`)
 2. Read the full diff (`git diff <base-branch>...HEAD`)
 3. For **each requirement** and **each acceptance criterion**:
    - Identify the code that addresses it (file + line references)
@@ -129,7 +129,7 @@ If gaps found → create/update seed files on the feature branch.
 
 ## Output Artifacts
 
-Generate in `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/evidence/`:
+Generate in `evidence/` under the ticket's context dir (`catalyst ticket context-dir`):
 
 ### `qa-report.md`
 ```markdown

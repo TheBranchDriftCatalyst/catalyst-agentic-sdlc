@@ -116,7 +116,7 @@ Produce a comparative report:
 - <or "coverage is adequate for this changeset">
 ```
 
-Save to: `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/evidence/coverage-report.md`
+Save to: `evidence/coverage-report.md` under the ticket's context dir (`catalyst ticket context-dir`)
 
 ## Fallback Behavior
 

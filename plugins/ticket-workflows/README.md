@@ -80,7 +80,7 @@ This plugin integrates with the beads issue tracker.
 ## Directory Structure
 
 ```
-.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/
+.scratch/ticket-workflows/sprint/DEV-XXXX-<short-desc>/
 ├── context.md           # Workflow index & progress (includes beads ID)
 ├── ticket-spec.md       # Original ticket
 ├── analysis.md          # Technical approach (optional)

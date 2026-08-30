@@ -21,8 +21,8 @@ Run the QA agent for test audit and manual verification.
 
 ## Output
 
-Agent generates in `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/evidence/`
-(derived from the current branch — see `/ticket-workflows:begin` for the canonical path template):
+Agent generates in `evidence/` under the ticket's context dir (resolved via
+`catalyst ticket context-dir` — see `/ticket-workflows:begin`):
 
 - `qa-report.md` - Combined report
 - `curl-commands.md` - API verification scripts

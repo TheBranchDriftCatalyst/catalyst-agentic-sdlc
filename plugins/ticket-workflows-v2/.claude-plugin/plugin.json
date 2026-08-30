@@ -1,0 +1,11 @@
+{
+  "name": "ticket-workflows-v2",
+  "description": "Ticket workflow (v2) that assumes `wt sprint start` owns orchestration (branch, worktree, and the flat .scratch/ context) and tracks state via Jira + .scratch/context.md. Strangler-fig successor to ticket-workflows; begin + status migrated first.",
+  "version": "0.1.0",
+  "author": {
+    "name": "TheBranchDriftCatalyst"
+  },
+  "repository": "https://github.com/TheBranchDriftCatalyst/catalyst-agentic-sdlc",
+  "license": "MIT",
+  "keywords": ["workflow", "tickets", "wt", "sprint", "scratch"]
+}

@@ -9,7 +9,7 @@ This agent:
 1. Identifies the current branch and ticket ID
 2. Reads the changeset (staged + unstaged changes)
 3. Reviews against the checklist below
-4. Generates a scorecard at `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/code-review.md`
+4. Generates a scorecard at `code-review.md` under the ticket's context dir (`catalyst ticket context-dir`)
 5. Updates the workflow context if it exists
 6. Optionally adds inline annotations if requested
 
@@ -67,7 +67,6 @@ The agent receives context about:
 - [ ] No N+1 query issues (use `select_related`/`prefetch_related`)
 - [ ] Bulk operations used where appropriate (`bulk_create`, `bulk_update`)
 - [ ] QuerySets evaluated only when necessary
-- [ ] Sequential looping over same arrays are questionable (consider combining into single loop)
 
 #### Models
 
@@ -121,7 +120,7 @@ Generate a scorecard with:
 4. Recommendations (nice to have)
 5. Files reviewed with line references
 
-Save to: `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/code-review.md`
+Save to: `code-review.md` under the ticket's context dir (`catalyst ticket context-dir`)
 
 Update context.md:
 

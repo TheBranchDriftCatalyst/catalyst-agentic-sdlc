@@ -22,31 +22,36 @@ Initialize a new ticket workflow with branch creation, context setup, and beads 
    - `feature/DEV-1234/user-metrics-export`
    - `bugfix/DEV-5678/fix-login-redirect`
 
-4. **Initialize context directory** using the canonical scratch path
-   `<type>/DEV-XXXX-<short-description>` (type grouping, dashed leaf):
+4. **Initialize context directory** using the shared resolver — never hand-build
+   the path:
 
    ```bash
-   # Derive path components from the branch
+   # Derive the ticket key from the branch (still needed for the beads
+   # labels + template below)
    BRANCH=$(git branch --show-current)
    TYPE="${BRANCH%%/*}"                # feature | bugfix | chore | doc
    REST="${BRANCH#*/}"                 # DEV-XXXX/<short-description>
    TICKET="${REST%%/*}"                # DEV-XXXX
-   DESC="${REST#*/}"                   # <short-description>
-   WORKFLOW_DIR=".scratch/ticket-workflows/${TYPE}/${TICKET}-${DESC}"
+
+   WORKFLOW_DIR="$(catalyst ticket context-dir "$TICKET" --ensure)" || {
+     echo "ERROR: could not resolve the ticket context dir for $TICKET (is catalyst on PATH and the ticket begun?)" >&2
+     exit 1
+   }
+   # Guard before ANY use: an empty capture (catalyst missing from PATH,
+   # resolver refusal) must fail fast — unguarded, mkdir would create
+   # /evidence at the filesystem ROOT.
+   [ -n "$WORKFLOW_DIR" ] && [ -d "$WORKFLOW_DIR" ] || { echo "ERROR: empty/missing WORKFLOW_DIR" >&2; exit 1; }
 
    mkdir -p "$WORKFLOW_DIR/evidence"
    mkdir -p "$WORKFLOW_DIR/decisions"
    ```
 
-   Examples:
-   - Branch `feature/DEV-10092/add-widget-theme-dynamic-vars`
-     → `.scratch/ticket-workflows/feature/DEV-10092-add-widget-theme-dynamic-vars/`
-   - Branch `bugfix/DEV-9838/add-price-tier-validation`
-     → `.scratch/ticket-workflows/bugfix/DEV-9838-add-price-tier-validation/`
-
-   **Do not** drop the `<type>` segment, and **do not** keep `<ticket>` and
-   `<desc>` as separate path components. Type groups workflows by branch
-   prefix; the dashed leaf keeps ticket + desc visible in a single `ls`.
+   `catalyst ticket context-dir <KEY> --ensure` resolves (and creates) the
+   canonical central context dir for the ticket — the same dir `catalyst
+   ticket update` uses, and the same dir the worktree's `.scratch` symlink
+   points at. It is a **flat** `{key}-{slug}` leaf. **Do not** hand-build the
+   path and **do not** introduce a grouping segment (`<type>/`, `sprint/`,
+   etc.) — the store has no subfolders by type or sprint.
 
 5. **Create beads issue** using the beads MCP tools:
 

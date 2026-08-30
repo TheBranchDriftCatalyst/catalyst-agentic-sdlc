@@ -1,7 +1,7 @@
 {
   "name": "ticket-workflows",
   "description": "Structured ticket workflow with progressive context, beads integration, quality gates, and per-stage agents (dev, review, QA, coverage)",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": {
     "name": "TheBranchDriftCatalyst"
   },
@@ -37,7 +37,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh -c 'BRANCH=$(git branch --show-current 2>/dev/null); if [ -n \"$BRANCH\" ]; then TYPE=${BRANCH%%/*}; REST=${BRANCH#*/}; TICKET=${REST%%/*}; DESC=${REST#*/}; DIR=\".scratch/ticket-workflows/$TYPE/$TICKET-$DESC\"; if [ -d \"$DIR\" ]; then echo \"[ticket-workflows] workflow context exists at $DIR - consider updating before ending session.\"; fi; fi'"
+            "command": "sh -c 'DIR=$(catalyst ticket context-dir 2>/dev/null); if [ -n \"$DIR\" ] && [ -d \"$DIR\" ]; then echo \"[ticket-workflows] workflow context exists at $DIR - consider updating before ending session.\"; fi'"
           }
         ]
       }

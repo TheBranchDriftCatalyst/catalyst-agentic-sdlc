@@ -103,7 +103,7 @@ Synthesis uses a confidence-weighted agreement matrix with an independence bonus
 
 ## Plugin: `ticket-workflows`
 
-Structured ticket workflow with progressive context, beads integration, quality gates, and per-stage agents. Drives a ticket from branch creation through dev → review → QA → wrapup, accumulating evidence in `.scratch/ticket-workflows/<type>/<id>-<desc>/`.
+Structured ticket workflow with progressive context, beads integration, quality gates, and per-stage agents. Drives a ticket from branch creation through dev → review → QA → wrapup, accumulating evidence in the ticket's canonical context dir (`$(catalyst ticket context-dir <KEY>)` — flat `{key}-{slug}`, no type grouping).
 
 ### Slash commands
 

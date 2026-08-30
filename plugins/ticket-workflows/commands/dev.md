@@ -29,7 +29,7 @@ Agent produces:
 
 - Code changes (staged, not committed)
 - Test files
-- Evidence in `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/evidence/`
+- Evidence in `evidence/` under the ticket's context dir (`catalyst ticket context-dir`)
 - Updated `context.md` with implementation notes
 
 Summary displayed:

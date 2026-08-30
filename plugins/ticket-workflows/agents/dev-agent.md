@@ -32,7 +32,7 @@ Maximum iterations: 3 (prevent infinite loops). If still failing after 3, report
 
 ### Phase 0: Context Loading
 
-1. Read the ticket spec from `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/ticket-spec.md`
+1. Read the ticket spec from `ticket-spec.md` under the ticket's context dir (`catalyst ticket context-dir`)
 2. Read `context.md` for any prior implementation notes or decisions
 3. Read the current diff to understand what's already been done (if resuming)
 4. Identify the acceptance criteria and test cases to satisfy
@@ -106,7 +106,7 @@ When a local server is available, use Playwright to verify behavior end-to-end:
 3. Check logs/side effects are correct
 ```
 
-Save all evidence to `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/evidence/`
+Save all evidence to `evidence/` under the ticket's context dir (`catalyst ticket context-dir`)
 
 #### 3c. Manual Verification Documentation
 
@@ -141,7 +141,7 @@ Self-review the complete changeset:
 
 ### Phase 5: Report
 
-Update `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/context.md`:
+Update `context.md` under the ticket's context dir (`catalyst ticket context-dir`):
 
 - Mark "Development" as complete (or in-progress if blocked)
 - Update Implementation Notes with what was done

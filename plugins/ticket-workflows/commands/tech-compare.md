@@ -60,7 +60,8 @@ For close decisions, build minimal PoCs:
 
 ### 6. Decision & Documentation
 
-Record the decision in `.scratch/ticket-workflows/<type>/DEV-XXXX-<short-desc>/decisions/<topic>.md`:
+Record the decision in `decisions/<topic>.md` under the ticket's context dir
+(`catalyst ticket context-dir`):
 
 ```markdown
 # Decision: <Topic>
