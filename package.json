@@ -14,12 +14,18 @@
     "format": "prettier --write \"**/*.{md,json,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{md,json,yml,yaml}\"",
     "validate:manifests": "node ./scripts/validate-manifests.mjs",
+    "test:hooks": "./plugins/catalyst-meta/test/git-guard/run.sh",
+    "test": "npm run validate:manifests && npm run test:hooks",
     "mcp:link": "./plugins/catalyst-meta/scripts/install-mcp-symlink.sh",
     "mcp:unlink": "./plugins/catalyst-meta/scripts/install-mcp-symlink.sh --uninstall",
     "commitlint": "commitlint --edit",
     "changelog": "conventional-changelog -p conventionalcommits -i CHANGELOG.md -s -r 0",
     "release": "commit-and-tag-version",
     "release:dry": "commit-and-tag-version --dry-run",
+    "release:patch": "commit-and-tag-version --release-as patch",
+    "release:minor": "commit-and-tag-version --release-as minor",
+    "release:major": "commit-and-tag-version --release-as major",
+    "release:push": "git push --follow-tags origin HEAD",
     "prepare": "lefthook install"
   },
   "devDependencies": {
@@ -145,7 +151,18 @@
       {
         "filename": "plugins/catalyst-meta/.claude-plugin/plugin.json",
         "type": "json"
+      },
+      {
+        "filename": "plugins/ticket-workflows-v2/.claude-plugin/plugin.json",
+        "type": "json"
+      },
+      {
+        "filename": ".claude-plugin/marketplace.json",
+        "updater": "scripts/marketplace-version-updater.cjs"
       }
-    ]
+    ],
+    "scripts": {
+      "prerelease": "npm run validate:manifests && npm run test:hooks"
+    }
   }
 }

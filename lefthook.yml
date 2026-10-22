@@ -12,6 +12,12 @@ pre-commit:
     validate-manifests:
       glob: "{.claude-plugin/marketplace.json,plugins/*/.claude-plugin/plugin.json}"
       run: node ./scripts/validate-manifests.mjs
+    # git-guard is a PreToolUse gate on every Bash call an agent makes, so a
+    # regression here silently stops blocking destructive git commands. The
+    # suite is pure stdin/exit-code assertions — no repo is touched, sub-second.
+    git-guard-tests:
+      glob: "plugins/catalyst-meta/{hooks/git-guard.sh,test/git-guard/run.sh}"
+      run: ./plugins/catalyst-meta/test/git-guard/run.sh && shellcheck -S error ./plugins/catalyst-meta/hooks/git-guard.sh
 
 commit-msg:
   commands:
