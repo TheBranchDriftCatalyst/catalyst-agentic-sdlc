@@ -11,28 +11,28 @@
       "name": "catalyst-sdlc-framework",
       "source": "./plugins/catalyst-sdlc-framework",
       "description": "Multi-agent SDLC framework with Cognitive Council deliberation and task decomposition patterns for structured feature development",
-      "version": "0.1.0",
+      "version": "0.3.0",
       "keywords": ["sdlc", "cognitive-council", "task-decomposition", "multi-agent", "deliberation"]
     },
     {
       "name": "ticket-workflows",
       "source": "./plugins/ticket-workflows",
       "description": "Structured ticket workflow with progressive context, beads integration, quality gates, and per-stage agents (dev, review, QA, coverage)",
-      "version": "0.1.0",
+      "version": "0.3.0",
       "keywords": ["workflow", "tickets", "code-review", "qa", "dev", "beads"]
     },
     {
       "name": "ticket-workflows-v2",
       "source": "./plugins/ticket-workflows-v2",
       "description": "Ticket workflow (v2): assumes `wt sprint start` owns orchestration and the flat .scratch/ context, tracks via Jira + context.md (no beads). Strangler-fig successor to ticket-workflows; begin + status migrated first.",
-      "version": "0.1.0",
+      "version": "0.3.0",
       "keywords": ["workflow", "tickets", "wt", "sprint", "scratch"]
     },
     {
       "name": "catalyst-meta",
       "source": "./plugins/catalyst-meta",
       "description": "Catalyst meta-plugin: global agents, slash commands, and session hooks (workstream briefing, pre/post-compact, git-guard). Designed to be kept always-enabled.",
-      "version": "0.1.0",
+      "version": "0.3.0",
       "keywords": ["meta", "globals", "hooks", "memory-service", "workstream"]
     }
   ]
